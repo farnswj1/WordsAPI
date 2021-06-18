@@ -1,0 +1,15 @@
+html body{
+    background-color: rgba(228, 228, 228, 0.7) !important;
+}
+
+.form-control {
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 50px;
+}
+
+.btn {
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 50px;
+}

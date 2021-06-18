@@ -1,30 +1,18 @@
 # Imported libraries
-from flask import Flask, render_template, request, jsonify, Response
+from flask import Flask, Response, render_template, request, jsonify
 import json
 
 # List of words (constant)
-WORDS = tuple(json.load(open("words.json")))
+WORDS = tuple(json.load(open("static/data/words.json")))
 
 # Flask app
 app = Flask(__name__)
 
 
-# API endpoint (with search parameters)
-@app.route("/api", methods=["GET"])
-def api():
-    search = request.args.get("search")
-
-    # If a search is done, return the words that match the search results
-    if search:
-        return jsonify([word for word in WORDS if search in word])
-    
-    return jsonify(WORDS)
-
-
-# Home endpoint (with search engine)
+# Index endpoint (with search engine)
 @app.route("/", methods=["GET"])
-def home():
-    search = request.args.get("search")
+def index():
+    search = request.args.get("search", "").lower()
 
     # If a search is done, return the words that match the search results
     if search:
@@ -33,8 +21,9 @@ def home():
             mimetype="application/json",
             headers={"Content-Disposition": "attachment;filename=results.json"}
         )
-    
-    return render_template("home.html")
+
+    # If no search is done, render the HTML page    
+    return render_template("index.html")
 
 
 # Download endpoint (returns the list of words)
@@ -45,6 +34,19 @@ def download():
         mimetype="application/json",
         headers={"Content-Disposition": "attachment;filename=results.json"}
     )
+
+
+# API endpoint (with search parameters)
+@app.route("/api", methods=["GET"])
+def api():
+    search = request.args.get("search", "").lower()
+
+    # If a search is done, return the words that match the search results
+    if search:
+        return jsonify([word for word in WORDS if search in word])
+       
+    # If no search is done, return the complete list of words
+    return jsonify(WORDS)
 
 
 # Executes the program

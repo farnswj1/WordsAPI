@@ -26,6 +26,12 @@ def index():
     return render_template("index.html")
 
 
+# About page
+@app.route("/about", methods=["GET"])
+def about():
+    return render_template("about.html")
+
+
 # Download endpoint (returns the list of words)
 @app.route("/download", methods=["GET"])
 def download():

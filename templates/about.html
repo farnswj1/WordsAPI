@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="row justify-content-center">
+        <div class="col-6">
+            <h3>This is the Words API!</h3>
+            <p>
+                Have you ever wanted to obtain a complete list of English words? 
+                What about checking to see if something is even a word? Or 
+                check for words that have a particular sequence of letters? 
+                Then you're in luck! This API is a solution to these problems.
+            </p>
+            <p>
+                At the home page, the search bar allows you to search for a list of 
+                words that contain the input text. The results are then sent back as 
+                a JSON file, which the user can observe and see if there are any words 
+                that matched.
+            </p>
+            <p>
+                Or maybe you just want to use this for other programs. That's also fine! 
+                We provide API endpoints!
+            </p>
+            <div class="alert alert-info">
+                <b>GET</b> &nbsp; /api &nbsp; 
+                <i>(retrieves the complete list of words)</i>
+            </div>
+            <div class="alert alert-info">
+                <b>GET</b> &nbsp; /api?search=[text] &nbsp; 
+                <i>(retrieves the words that match the specified text)</i>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
